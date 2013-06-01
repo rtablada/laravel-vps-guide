@@ -101,12 +101,19 @@ Now we can configure Nginx to serve up our application. We will need to dig into
 	- `index index.php;` - What should we load when we get a raw domain or IP?
 	- `location /` - this block replicates the .htaccess that ships with Laravel and removes index.php from the application request
 		- `try_files   $uri $uri/ /index.php?$query_string;`
-	- ```
-			if (!-d $request_filename) {
-        		rewrite     ^/(.+)/$ /$1 permanent;
-    		}
-    	```
+	- `if (!-d $request_filename) {rewrite     ^/(.+)/$ /$1 permanent; }` - Dayle says this fixes issues for the routing system by removing trailing slashes
+	- `location ~* \.php$` - This is all of the instructions for PHP files, we are going to send everything to PHP FPM
+		- `fastcgi_pass	unix:/var/run/php5-fpm.sock;`
+		- `fastcgi_index	index.php;`
+		- `fastcgi_split_path_info	^(.+\.php)(.*)$;`
+		- `include	/etc/nginx/fastcgi_params;`
+		- `fastcgi_param	SCRIPT_FILENAME $document_root$fastcgi_script_name;`
+	- `location ~ /\.ht { deny all; }` - stops the default .htaccess from messing things up
+	- `location ~* \.(?:ico|css|js|jpe?g|JPG|png|svg|woff)$ {expires 365d; }` - This has to do with the expiration of caching for assets
 
+Your file should look a bit like [this](files/nginx-default).
+
+Finally, you need to start up Nginx: `sudo service nginx start`. If it says that Nginx is already running then: `sudo service nginx restart`.
 
 ## Pulling Remote Git Repositories
 
