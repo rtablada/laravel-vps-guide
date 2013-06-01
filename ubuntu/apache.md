@@ -1,4 +1,4 @@
-# Laravel 4 with Apache on Ubuntu 12.04
+# Laravel 4 with Apache on Ubuntu 12.10
 
 To get started with this guide, I assume you have a running installation of Ubuntu with terminal access (either through SSH to a remote server/VPS or on a terminal prompt in a virtual/physical machine).
 
@@ -7,6 +7,7 @@ To get started with this guide, I assume you have a running installation of Ubun
 - [Initial Setup](#initial-setup)
 - [Install Git](#install-git)
 - [Setup ZSH Prompt](#setup-zsh-optional)
+- [Install LAMP](#install-the-lamp-stack)
 
 ## Initial Setup
 
@@ -55,3 +56,44 @@ You can modify the theme used by changing the ZSH_THEME in your .zshrc file. `na
 
 Last, we will need to change your default shell prompt from Bash to ZSH. `chsh -s /bin/zsh`. And to get all the awesomeness of ZSH you will have to re-login.
 
+## Install the LAMP Stack
+
+Now we get to the fun part: installing the LAMP (Linux Apache MySQL PHP) components.
+
+First we install the Apache HTTP Server. This will connect HTTP requests to the proper services (in our case, PHP). `sudo apt-get install apache2`.
+
+Now we'll tackle the 'M' - MySQL. If you don't already know, MySQL is an Open Source Database that will store the majority of dynamic info for your application. This script is a bit longer because it also installs necessary modules to make MySQL talk to Apache and PHP. This will ask for a root user password: set it to something secure, this user will have access to all of your databases (including the database that controls user authentication for MySQL). `sudo apt-get install mysql-server libapache2-mod-auth-mysql php5-mysql`
+
+Now we have to finish setting up MySQL. `sudo mysql_install_db` & `sudo /usr/bin/mysql_secure_installation` Answer 'y' to all of the questions. This will set some default settings that make your MySQL install a bit more secure (like disabling remote root login).
+
+Finally, this is what you all been waitin' for 'aint it? What people pay paper for... Now we're going to install PHP. This isn't your grandad's (or your shared host's) PHP 5.2 or anything either, at the time of this guide, this will install PHP 5.4.6 (if you are on Ubuntu 12.04, you'll get 5.3.x which isn't very fun)! And this will handle installing the PHP MCrypt module which is used in Laravel's Hash. `sudo apt-get install php5 libapache2-mod-php5 php5-mcrypt`
+
+## Installing Composer Globally
+
+For Laravel 4, you're going to need Composer. Don't worry, it is super easy to install! `curl -sS https://getcomposer.org/installer | php` & `sudo mv composer.phar /usr/local/bin/composer`
+
+Now when you run the command `composer` you should get a composer options prompt.
+
+## Installing Laravel 4
+
+With Laravel 4 being stable you can now install it in a single command, which is awesome. But first we will have to go to the right directory. When you installed your LAMP stack, it created a folder for your websites. `cd /var/www/`
+
+You will also have to set the permissions for this folder `sudo chmod -R 777 /var/www/` This will allow you to read and write to the websites folder and it will let Apache read from here.
+
+Now we can pull down Laravel 4 from composer `composer create-project laravel/laravel`.
+
+We will move into the Laravel installation now and install the framework dependencies `cd laravel` & `composer install`.
+
+Finally, you need to set the permissions for Laravel to do all of its caching magic: `sudo chmod -R 777 app/storage`
+
+## Setting up apache for Laravel
+
+By default, Apache reads from `/var/www` which isn't what we want. So we will have to modify our Apache configuration.
+
+First we have to let Apache know to look for PHP files. `sudo nano /etc/apache2/mods-enabled/dir.conf`
+
+In this file, find the line that starts with DirectoryIndex and add `index.php` so it will look something like this `DirectoryIndex index.php index.html index.cgi index.pl index.php index.xhtml index.htm` **Note:** The order of these matter, by placing index.php first, we prioritize it over other index files that may exist. Now save the file.
+
+Now we will modify our default site configuration in Apache. This gets into some more complicated configuration options so I won't be able to explain everything, but I will get you up and running. `sudo nano /etc/apache2/sites-available/default` I suggest using ZSH or Bash tab completion to make sure that you are editing the proper file (sometimes it isn't always named 'default').
+
+Now let's go setting by setting to
