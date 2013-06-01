@@ -12,4 +12,4 @@ This repository looks to have configuration guides for multiple OS from start to
 
 -	Ubuntu 12.10
 	- [Apache2](ubuntu/apache.md)
-	- Nginx (In Progress)
+	- [Nginx](ubuntu/nginx.md)
