@@ -111,3 +111,20 @@ Now let's go setting by setting to get everything working.
 		- `allow from all` - Makes the server accept requests from any client
 
 The rest of this file should be left to its defaults so the final product looks a bit like [this](files/apache-default).
+
+Now we just need to restart the apache service for these settings to be applied `sudo service apache2 restart`.
+
+That's it! You should now have a raw version of Laravel 4 installed on your VPS and responding like a champ.
+
+## Pulling in a Repo
+
+Having a bare Laravel install is great, but doing all of your editing through SSH on a VPS is not realistic. Instead, let's wire this up to pull from an existing project you have setup on github or another git repo!
+
+Move into the websites directory: `cd /var/www`
+Remove the old Laravel 4 install `rm -rf laravel`
+Pull in your repository `git pull **url_to_repo** laravel`
+Composer install components `cd laravel` & `composer install`
+Make git ignore file permissions (saves tons of headaches of detached HEAD problems) - git config core.filemode false
+Set file permissions `sudo chmod -R 777 app/storage`
+
+That's it. Now when you want to pull down changes from your repository just run `cd /var/www/laravel` & `git pull` (if you change any composer packages you will also need to run `composer update`).
