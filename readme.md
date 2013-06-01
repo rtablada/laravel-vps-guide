@@ -11,5 +11,5 @@ This repository looks to have configuration guides for multiple OS from start to
 ## Available Guides
 
 -	Ubuntu 12.04
-	- [ ] [Apache2](ubuntu/apache.md)
-	- [ ] [Nginx](ubuntu/nginx.md)
+	- [Apache2](ubuntu/apache.md)
+	- [Nginx](ubuntu/nginx.md)
