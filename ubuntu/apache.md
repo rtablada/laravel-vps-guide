@@ -2,6 +2,8 @@
 
 To get started with this guide, I assume you have a running installation of Ubuntu with terminal access (either through SSH to a remote server/VPS or on a terminal prompt in a virtual/physical machine).
 
+For those who are impatient, you can see just the commands for setting up the LAMP stack, composer and Laravel. Find the commands [here](bare/apache.md)
+
 ## Contents
 
 - [Initial Setup](#initial-setup)
