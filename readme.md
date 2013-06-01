@@ -9,5 +9,5 @@ This repository looks to have configuration guides for multiple OS from start to
 ## Available Guides
 
 -	Ubuntu 12.04
-	-	[ ] Apache2
-	-	[ ] Nginx
+	- [ ] Apache2
+	- [ ] Nginx
