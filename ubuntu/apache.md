@@ -40,7 +40,7 @@ Login to your server using your new credentials.
 
 ## Install Git
 
-This is a quick command `sudo apt-get update && sudo apt-get install git`. You will also want to set your name and email for your git config: `git config --global user.name "**USER_NAME**"` & `git config --global user.email **your@email.com***
+This is a quick command `sudo apt-get update && sudo apt-get install git`. You will also want to set your name and email for your git config: `git config --global user.name "**USER_NAME**"` & `git config --global user.email **your@email.com***`
 
 ## Setup ZSH (Optional)
 
