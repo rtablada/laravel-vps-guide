@@ -96,4 +96,18 @@ In this file, find the line that starts with DirectoryIndex and add `index.php` 
 
 Now we will modify our default site configuration in Apache. This gets into some more complicated configuration options so I won't be able to explain everything, but I will get you up and running. `sudo nano /etc/apache2/sites-available/default` I suggest using ZSH or Bash tab completion to make sure that you are editing the proper file (sometimes it isn't always named 'default').
 
-Now let's go setting by setting to
+Now let's go setting by setting to get everything working.
+
+- VirtualHost - Directs Apache what it needs to listen to *:80 catches all HTTP requests. Every option in this tag will apply to requests that match this pattern and port.
+	- ServerAdmin - list your email
+	- DocumentRoot - `/var/www/laravel/public` (This is where we installed Laravel)
+	- Directory - This will be a XML-ish block and you should make it look like `<Directory /var/www/laravel/public>`
+		- `Options Indexes FollowSymLinks MultiViews`
+			- Indexes - Makes Apache look for index.php (and all of the various extensions we set up earlier)
+			- FollowSymLinks - Allows Unix style symbolic links to be used to put content on your site
+			- MultiViews - I think this allows Laravel to capture the URIs. I'm not too clear on what it does, but you need this option enabled.
+		- `AllowOverride None` - .htaccess files will not be allowed to override configuration options, just add options and modules.
+		- `Order allow,deny` - Makes the server accept requests
+		- `allow from all` - Makes the server accept requests from any client
+
+The rest of this file should be left to its defaults so the final product looks a bit like [this](files/apache-default).
