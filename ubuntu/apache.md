@@ -6,7 +6,7 @@ To get started with this guide, I assume you have a running installation of Ubun
 
 - [Initial Setup](#initial-setup)
 - [Install Git](#install-git)
-- [Setup ZSH Prompt](#setup-zsh)
+- [Setup ZSH Prompt](#setup-zsh-optional)
 
 ## Initial Setup
 
@@ -53,4 +53,5 @@ Now you have to actually make Oh My ZSH your configuration framework. `cp ~/.oh-
 
 You can modify the theme used by changing the ZSH_THEME in your .zshrc file. `nano ~/.zshrc`. I like a theme called 'doubleend' from [Andrew Burgess](https://github.com/andrew8088/oh-my-zsh/blob/master/themes/doubleend.zsh-theme). You will need to download this as it isn't included in the standard Oh My ZSH themes. `cd ~/.oh-my-zsh/themes` then `wget https://raw.github.com/andrew8088/oh-my-zsh/master/themes/doubleend.zsh-theme`.
 
-Last, we will need to change your default shell prompt from Bash to ZSH. `chsh -s /bin/zsh`. And to get all the awesomeness of ZSH you will have to relogin.
+Last, we will need to change your default shell prompt from Bash to ZSH. `chsh -s /bin/zsh`. And to get all the awesomeness of ZSH you will have to re-login.
+
