@@ -22,5 +22,6 @@ composer create-project laravel/laravel
 cd laravel
 composer install
 sudo chmod -R 777 app/storage
-sudo wget https://raw.github.com/rtablada/laravel-vps-guide/master/ubuntu/files/apache-default /etc/apache2/sites-available/default
+sudo wget https://raw.github.com/rtablada/laravel-vps-guide/master/ubuntu/files/apache-default
+sudo mv apache-default /etc/apache2/sites-available/default
 sudo service apache2 restart
