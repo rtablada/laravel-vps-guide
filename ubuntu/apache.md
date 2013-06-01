@@ -8,6 +8,10 @@ To get started with this guide, I assume you have a running installation of Ubun
 - [Install Git](#install-git)
 - [Setup ZSH Prompt](#setup-zsh-optional)
 - [Install LAMP](#install-the-lamp-stack)
+- [Install Composer](#installing-composer-globally)
+- [Install Laravel](#installing-laravel-4)
+- [Setup Apache for Laravel](#setting-up-apache-for-laravel)
+- [Remote Git Repositories](#pulling-remote-git-repositories)
 
 ## Initial Setup
 
@@ -86,7 +90,7 @@ We will move into the Laravel installation now and install the framework depende
 
 Finally, you need to set the permissions for Laravel to do all of its caching magic: `sudo chmod -R 777 app/storage`
 
-## Setting up apache for Laravel
+## Setting Up Apache for Laravel 4
 
 By default, Apache reads from `/var/www` which isn't what we want. So we will have to modify our Apache configuration.
 
@@ -116,7 +120,7 @@ Now we just need to restart the apache service for these settings to be applied 
 
 That's it! You should now have a raw version of Laravel 4 installed on your VPS and responding like a champ.
 
-## Pulling in a Repo
+## Pulling Remote Git Repositories
 
 Having a bare Laravel install is great, but doing all of your editing through SSH on a VPS is not realistic. Instead, let's wire this up to pull from an existing project you have setup on github or another git repo!
 
