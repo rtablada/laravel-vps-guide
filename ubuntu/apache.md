@@ -88,7 +88,7 @@ You will also have to set the permissions for this folder `sudo chmod -R 777 /va
 
 Now we can pull down Laravel 4 from composer `composer create-project laravel/laravel`.
 
-We will move into the Laravel installation now and install the framework dependencies `cd laravel` & `composer install`.
+We will move into the Laravel installation now `cd laravel`.
 
 Finally, you need to set the permissions for Laravel to do all of its caching magic: `sudo chmod -R 777 app/storage`
 
