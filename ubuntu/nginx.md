@@ -10,7 +10,7 @@ To get started with this guide, I assume you have a running installation of Ubun
 - [Install LEMP](#install-the-lemp-stack)
 - [Install Composer](#installing-composer-globally)
 - [Install Laravel](#installing-laravel-4)
-- [Setup Nginx for Laravel](#setting-up-apache-for-laravel-4)
+- [Setup Nginx for Laravel](#setting-up-nginx-for-laravel-4)
 - [Remote Git Repositories](#pulling-remote-git-repositories)
 
 ## Initial Setup
