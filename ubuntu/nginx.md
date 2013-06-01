@@ -92,7 +92,21 @@ Finally, you need to set the permissions for Laravel to do all of its caching ma
 
 ## Setting Up Nginx for Laravel 4
 
-Now we can configure Nginx to serve up our application.
+Now we can configure Nginx to serve up our application. We will need to dig into the default site. This is based on the configuration from [Dayle Rees](https://github.com/daylerees/laravel-website-configs/blob/master/nginx.conf) `sudo nano /etc/nginx/sites-available/default`
+
+- server - this contains all of the rules for a single service. This is similar to VirtualHost block in Apache.
+	- `listen 80` - this makes Nginx catch all website requests
+	- `server localhost` - this tells Nginx what to listen to. You can set this to your Fully Qualified Domain or your public IP Address.
+	- `root /var/www/laravel;` - This is where our project is located
+	- `index index.php;` - What should we load when we get a raw domain or IP?
+	- `location /` - this block replicates the .htaccess that ships with Laravel and removes index.php from the application request
+		- `try_files   $uri $uri/ /index.php?$query_string;`
+	- ```
+			if (!-d $request_filename) {
+        		rewrite     ^/(.+)/$ /$1 permanent;
+    		}
+    	```
+
 
 ## Pulling Remote Git Repositories
 
