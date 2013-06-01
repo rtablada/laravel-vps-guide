@@ -1,0 +1,25 @@
+server {
+	listen          80
+
+	server_name     localhost
+
+	root            /var/www/laravel;
+
+	index           index.php;
+
+	location / { try_files   $uri $uri/ /index.php?$query_string; }
+
+	if (!-d $request_filename) { rewrite     ^/(.+)/$ /$1 permanent; }
+
+	location ~* \.php$ {
+			fastcgi_pass				unix:/var/run/php5-fpm.sock;
+			fastcgi_index				index.php;
+			fastcgi_split_path_info		^(.+\.php)(.*)$;
+			include						/etc/nginx/fastcgi_params;
+			fastcgi_params				SCRIPT_FILENAME $document_root$fastcgi_script_name;
+	}
+
+	location ~ /\.ht { deny all; }
+
+	location ~* \.(?:ico|css|js|jpe?g|JPG|png|svg|woff)$ { expires 365d; }
+}
