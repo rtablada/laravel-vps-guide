@@ -10,7 +10,7 @@ To get started with this guide, I assume you have a running installation of Ubun
 - [Install LAMP](#install-the-lamp-stack)
 - [Install Composer](#installing-composer-globally)
 - [Install Laravel](#installing-laravel-4)
-- [Setup Apache for Laravel](#setting-up-apache-for-laravel)
+- [Setup Apache for Laravel](#setting-up-apache-for-laravel-4)
 - [Remote Git Repositories](#pulling-remote-git-repositories)
 
 ## Initial Setup
