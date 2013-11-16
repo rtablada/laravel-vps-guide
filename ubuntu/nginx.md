@@ -1,4 +1,4 @@
-# Laravel 4 with Apache on Ubuntu 12.10
+# Laravel 4 with Nginx on Ubuntu 12.10
 
 To get started with this guide, I assume you have a running installation of Ubuntu with terminal access (either through SSH to a remote server/VPS or on a terminal prompt in a virtual/physical machine).
 
@@ -66,7 +66,7 @@ A LEMP stack is a light-weight solution compared to the weight of Apache. For th
 
 Let's start by installing Nginx. `sudo apt-get install nginx`
 
-Now we'll tackle the 'M' - MySQL. If you don't already know, MySQL is an Open Source Database that will store the majority of dynamic info for your application. This script is a bit longer because it also installs necessary modules to make MySQL talk to Apache and PHP. This will ask for a root user password: set it to something secure, this user will have access to all of your databases (including the database that controls user authentication for MySQL). `sudo apt-get install mysql-server`.
+Now we'll tackle the 'M' - MySQL. If you don't already know, MySQL is an Open Source Database that will store the majority of dynamic info for your application. This script is a bit longer because it also installs necessary modules to make MySQL talk to Nginx and PHP. This will ask for a root user password: set it to something secure, this user will have access to all of your databases (including the database that controls user authentication for MySQL). `sudo apt-get install mysql-server`.
 
 To finish off our LEMP stack, we have to get PHP FPM up and running. `sudo apt-get install php5-fpm`
 
@@ -82,7 +82,7 @@ Now when you run the command `composer` you should get a composer options prompt
 
 With Laravel 4 being stable you can now install it in a single command, which is awesome. But first we will have to go to the right directory. When you installed your LAMP stack, it created a folder for your websites. `cd /var/www/`
 
-You will also have to set the permissions for this folder `sudo chmod -R 777 /var/www/` This will allow you to read and write to the websites folder and it will let Apache read from here.
+You will also have to set the permissions for this folder `sudo chmod -R 777 /var/www/` This will allow you to read and write to the websites folder and it will let Nginx read from here.
 
 Now we can pull down Laravel 4 from composer `composer create-project laravel/laravel`.
 
@@ -97,7 +97,7 @@ Now we can configure Nginx to serve up our application. We will need to dig into
 - server - this contains all of the rules for a single service. This is similar to VirtualHost block in Apache.
 	- `listen 80` - this makes Nginx catch all website requests
 	- `server localhost` - this tells Nginx what to listen to. You can set this to your Fully Qualified Domain or your public IP Address.
-	- `root /var/www/laravel;` - This is where our project is located
+	- `root /var/www/laravel/public;` - This is where our project is located
 	- `index index.php;` - What should we load when we get a raw domain or IP?
 	- `location /` - this block replicates the .htaccess that ships with Laravel and removes index.php from the application request
 		- `try_files   $uri $uri/ /index.php?$query_string;`
@@ -121,7 +121,7 @@ Having a bare Laravel install is great, but doing all of your editing through SS
 
 Move into the websites directory: `cd /var/www`
 Remove the old Laravel 4 install `rm -rf laravel`
-Pull in your repository `git pull **url_to_repo** laravel`
+Clone in your repository `git clone **url_to_repo** laravel`
 Composer install components `cd laravel` & `composer install`
 Make git ignore file permissions (saves tons of headaches of detached HEAD problems) - git config core.filemode false
 Set file permissions `sudo chmod -R 777 app/storage`

@@ -3,7 +3,7 @@ server {
 
 	server_name     localhost
 
-	root            /var/www/laravel;
+	root            /var/www/laravel/public;
 
 	index           index.php;
 
